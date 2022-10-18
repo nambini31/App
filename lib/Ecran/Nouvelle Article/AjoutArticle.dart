@@ -1,66 +1,22 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, use_key_in_widget_constructors, unused_local_variable, use_build_context_synchronously
-
-import 'dart:convert';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:app/Ecran/second_page_avant.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
-class Login extends StatefulWidget {
+class Article extends StatefulWidget {
+  const Article({super.key});
+
   @override
-  State<Login> createState() => _LoginState();
+  State<Article> createState() => _ArticleState();
 }
 
-class _LoginState extends State<Login> {
-  String nom = "";
-  String mot_de_passe = "";
-  String text = "";
-  bool obscurtext = true;
-  // void submit(String e) {
-  //   setState(() {
-  //     text = "Message envoyé a $e";
-  //   });
-  // }
-
-  var formValide = GlobalKey<FormState>();
-
-  void login(String nom, String mot_de_passe) async {
-    //final response = await http.post(Uri.parse('http://197.7.2.146/php/login.php'), body: {"username": nom, "password": mot_de_passe});
-    final response = await http.post(Uri.parse('http://192.168.74.1/app/lib/php/login.php'), body: {"username": nom, "password": mot_de_passe});
-    if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
-      if (data[0] == 0) {
-        print("tsy mitovy");
-      } else {
-        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-          return Secondpage();
-        }));
-      }
-    } else {
-      print("rien");
-    }
-  }
-
-  void change(String e) {
-    setState(() {
-      text = e;
-    });
-  }
-
-  void validationform() {
-    if (formValide.currentState!.validate()) {
-      login(nom, mot_de_passe);
-    } else {}
-  }
-
+class _ArticleState extends State<Article> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: Form(
-          key: formValide,
+          //key: formValide,
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             //padding: EdgeInsets.fromLTRB(30, MediaQuery.of(context).size.width / 15, 30, MediaQuery.of(context).size.width / 15),
@@ -112,14 +68,10 @@ class _LoginState extends State<Login> {
                           ),
                         ),
                         onChanged: (value) {
-                          setState(() {
-                            nom = value;
-                          });
+                          setState(() {});
                         },
                         validator: (value) => value!.isEmpty ? "Veuillez entrer votre nom" : null,
-                        onSaved: (newValue) {
-                          nom = newValue!;
-                        },
+                        onSaved: (newValue) {},
                         //onSubmitted: submit,
                       ),
                       SizedBox(
@@ -128,16 +80,9 @@ class _LoginState extends State<Login> {
                       TextFormField(
                         keyboardType: TextInputType.visiblePassword,
                         style: TextStyle(fontSize: 19),
-                        onChanged: (value) {
-                          setState(() {
-                            mot_de_passe = value;
-                          });
-                        },
+                        onChanged: (value) {},
                         validator: (value) => value!.isEmpty ? "Veuillez entrer votre mot de passe" : null,
-                        onSaved: (newValue) {
-                          mot_de_passe = newValue!;
-                        },
-                        obscureText: obscurtext,
+                        onSaved: (newValue) {},
                         decoration: InputDecoration(
                             //contentPadding: EdgeInsets.only(top: 20),
 
@@ -152,12 +97,8 @@ class _LoginState extends State<Login> {
                               color: Colors.blue,
                             ),
                             suffixIcon: GestureDetector(
-                              onTap: () {
-                                setState(() {
-                                  obscurtext = !obscurtext;
-                                });
-                              },
-                              child: obscurtext
+                              onTap: () {},
+                              child: false
                                   ? Icon(
                                       Icons.visibility_off,
                                       color: Colors.grey,
@@ -177,7 +118,7 @@ class _LoginState extends State<Login> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(50),
                           child: ElevatedButton(
-                            onPressed: validationform,
+                            onPressed: () {},
                             style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 243, 63, 146))),
                             child: Text("Connecter", style: TextStyle(fontSize: 20)),
                           ),
