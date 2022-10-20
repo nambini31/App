@@ -9,7 +9,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'two_letter_icon.dart';
 import 'modele/item.dart';
 
 class PagesListes extends StatefulWidget {
@@ -36,6 +36,8 @@ class _PagesListeState extends State<PagesListes> {
     });
   }
 
+  //SlidableController final  =  SlidableController ();
+
   @override
   void initState() {
     // TODO: implement initStatess
@@ -50,6 +52,16 @@ class _PagesListeState extends State<PagesListes> {
         title: Text("Listes des items"),
         actions: [
           IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PagesNouveauArticle(),
+                  ));
+            },
+            icon: Icon(Icons.add),
+          ),
+          IconButton(
               onPressed: () {
                 Navigator.push(
                     context,
@@ -57,50 +69,58 @@ class _PagesListeState extends State<PagesListes> {
                       builder: (context) => PagesNouveauArticle(),
                     ));
               },
-              icon: Icon(Icons.article))
+              icon: Icon(Icons.more_vert))
         ],
       ),
-      body: SlidableAutoCloseBehavior(
-        closeWhenOpened: true,
-        closeWhenTapped: true,
-        child: Center(
-          child: (listes.isEmpty)
-              ? AucuneDonnes()
-              : ListView.builder(
-                  itemCount: listes.length,
-                  itemBuilder: (context, index) {
-                    Item item = listes[index];
-                    return SingleChildScrollView(
-                      child: Slidable(
-                        endActionPane: ActionPane(motion: ScrollMotion(), extentRatio: 0.5, children: [
-                          SlidableAction(
-                            onPressed: (context) {
-                              alerte1(item);
-                            },
-                            label: "Delete",
-                            backgroundColor: Colors.red,
-                            icon: Icons.delete,
-                          ),
-                          Padding(padding: EdgeInsets.all(2)),
-                          SlidableAction(
-                            onPressed: (context) {
-                              nom1.text = item.nom;
-                              alertmodif(item);
-                            },
-                            label: "Update",
-                            backgroundColor: Colors.blue,
-                            icon: Icons.update,
-                          )
-                        ]),
-                        child: ListTile(
-                            onTap: () {},
-                            title: Text(item.nom),
-                            subtitle: Text(item.id.toString()),
-                            leading: Icon(Icons.home),
-                            trailing: IconButton(onPressed: () {}, icon: Icon(Icons.shower))),
-                      ),
-                    );
-                  }),
+      body: GestureDetector(
+        onTap: () {
+          print("clicked");
+          //Slidable.of(context)!.close(duration: Duration(seconds: 0));
+        },
+        child: SlidableAutoCloseBehavior(
+          closeWhenOpened: true,
+          closeWhenTapped: true,
+          child: Center(
+            child: (listes.isEmpty)
+                ? AucuneDonnes()
+                : ListView.builder(
+                    itemCount: listes.length,
+                    itemBuilder: (context, index) {
+                      Item item = listes[index];
+                      return SingleChildScrollView(
+                        child: Slidable(
+                          endActionPane: ActionPane(motion: ScrollMotion(), extentRatio: 0.5, children: [
+                            SlidableAction(
+                              onPressed: (context) {
+                                alerte1(item);
+                              },
+                              label: "Delete",
+                              backgroundColor: Colors.red,
+                              icon: Icons.delete,
+                            ),
+                            Padding(padding: EdgeInsets.all(2)),
+                            SlidableAction(
+                              onPressed: (context) {
+                                nom1.text = item.nom;
+                                alertmodif(item);
+                              },
+                              label: "Update",
+                              backgroundColor: Colors.blue,
+                              icon: Icons.update,
+                            )
+                          ]),
+                          child: ListTile(
+                              onTap: () {},
+                              title: Text(item.nom),
+                              subtitle: Text(item.id.toString()),
+                              leading: TwoLetterIcon(
+                                item.nom,
+                              ),
+                              trailing: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))),
+                        ),
+                      );
+                    }),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -117,7 +137,8 @@ class _PagesListeState extends State<PagesListes> {
       barrierDismissible: false,
       builder: (context) => AlertDialog(
         content: Container(
-          width: 100,
+          //width: 100,
+          height: 140,
           padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

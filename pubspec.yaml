@@ -46,6 +46,7 @@ dependencies:
   intl: ^0.15.7
   flutter_slidable: any
   image_picker: any
+  flutter_barcode_scanner: ^2.0.0
 
 dev_dependencies:
   flutter_test:
