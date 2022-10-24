@@ -52,26 +52,19 @@ class _PagesListeState extends State<ListesNouveauArticle> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ListesMagasin(),
-                )),
-            icon: Icon(Icons.arrow_back)),
         title: Text("Listes des Articles"),
         // ignore: prefer_const_literals_to_create_immutables
         actions: [
-          // IconButton(
-          //   onPressed: () {
-          //     Navigator.push(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder: (context) => AjoutNouveauArticle(),
-          //         ));
-          //   },
-          //   icon: Icon(Icons.add),
-          // ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AjoutNouveauArticle(),
+                  ));
+            },
+            icon: Icon(Icons.add),
+          ),
           // IconButton(
           //     onPressed: () {
           //       // Navigator.push(
@@ -144,17 +137,6 @@ class _PagesListeState extends State<ListesNouveauArticle> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AjoutNouveauArticle(),
-              ));
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 

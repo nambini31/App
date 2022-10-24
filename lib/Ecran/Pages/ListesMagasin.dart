@@ -54,15 +54,14 @@ class _PagesListeState extends State<ListesMagasin> {
         title: Text("Listes des Magasins"),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ListesNouveauArticle(),
-                  ));
-            },
-            icon: Icon(Icons.add),
-          ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ListesNouveauArticle(),
+                    ));
+              },
+              icon: IconButton(onPressed: alert, icon: Icon(Icons.add))),
         ],
       ),
       body: GestureDetector(
@@ -115,11 +114,6 @@ class _PagesListeState extends State<ListesMagasin> {
                       }),
             ),
           )),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: alert,
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 

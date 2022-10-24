@@ -19,10 +19,15 @@ class _indexState extends State<index> {
 
   List<Widget> pages = [Acceuil(), ListesNouveauArticle(), ListesMagasin()];
 
+  void onItemTap(int index) {
+    setState(() {
+      i = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: Container(
         child: pages[i],
       ),
@@ -33,9 +38,7 @@ class _indexState extends State<index> {
           BottomNavigationBarItem(icon: Icon(Icons.shop_rounded), label: "Magasin"),
         ],
         currentIndex: i,
-        onTap: (value) {
-          setState(() => i == value);
-        },
+        onTap: onItemTap,
       ),
     );
   }
