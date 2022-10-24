@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:app/Ecran/Pages/AucuneDonnes.dart';
 import 'package:app/Ecran/Pages/ListesNouveauArticle.dart';
 import 'package:app/Ecran/Ajout/AjoutNouveauArticle.dart';
+import 'package:app/Ecran/Pages/index.dart';
 import 'package:app/Ecran/modele/dataMagasin.dart';
 import 'package:app/Ecran/modele/database_Helper.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,16 @@ class _PagesListeState extends State<ListesMagasin> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Listes des Magasins"),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => index(1),
+                ));
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         actions: [
           IconButton(
               onPressed: () {

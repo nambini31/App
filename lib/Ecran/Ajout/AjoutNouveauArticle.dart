@@ -5,6 +5,7 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:app/Ecran/Pages/ListesNouveauArticle.dart';
+import 'package:app/Ecran/Pages/index.dart';
 import 'package:app/Ecran/modele/article.dart';
 import 'package:app/Ecran/modele/dataArticle.dart';
 import 'package:app/Ecran/modele/dataMagasin.dart';
@@ -69,7 +70,7 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ListesNouveauArticle(),
+            builder: (context) => index(1),
           ));
     } else {}
   }
@@ -432,7 +433,7 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => ListesNouveauArticle(),
+                                      builder: (context) => index(1),
                                     ));
                                 //recuperer();
                               },

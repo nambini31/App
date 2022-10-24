@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:app/Ecran/Pages/Acceuil.dart';
 import 'package:app/Ecran/Pages/ListesMagasin.dart';
@@ -8,7 +8,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class index extends StatefulWidget {
-  const index({super.key});
+  int i = 0;
+  index(this.i);
 
   @override
   State<index> createState() => _indexState();
@@ -16,6 +17,12 @@ class index extends StatefulWidget {
 
 class _indexState extends State<index> {
   int i = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    i = widget.i;
+  }
 
   List<Widget> pages = [Acceuil(), ListesNouveauArticle(), ListesMagasin()];
 

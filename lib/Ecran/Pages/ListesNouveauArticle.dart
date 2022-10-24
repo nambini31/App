@@ -5,6 +5,7 @@ import 'package:app/Ecran/Pages/AucuneDonnes.dart';
 import 'package:app/Ecran/Ajout/AjoutNouveauArticle.dart';
 import 'package:app/Ecran/Pages/ListesMagasin.dart';
 import 'package:app/Ecran/Pages/NouveauArticleDetails.dart';
+import 'package:app/Ecran/Pages/index.dart';
 import 'package:app/Ecran/modele/article.dart';
 import 'package:app/Ecran/modele/dataArticle.dart';
 import 'package:flutter/material.dart';
@@ -53,6 +54,16 @@ class _PagesListeState extends State<ListesNouveauArticle> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Listes des Articles"),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => index(0),
+                ));
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
         // ignore: prefer_const_literals_to_create_immutables
         actions: [
           IconButton(

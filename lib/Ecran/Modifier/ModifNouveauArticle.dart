@@ -6,6 +6,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:app/Ecran/Pages/ListesNouveauArticle.dart';
+import 'package:app/Ecran/Pages/index.dart';
 import 'package:app/Ecran/modele/article.dart';
 import 'package:app/Ecran/modele/dataArticle.dart';
 import 'package:app/Ecran/modele/dataMagasin.dart';
@@ -68,7 +69,7 @@ class _PagesNouveauArticleState extends State<ModifNouveauArticle> {
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ListesNouveauArticle(),
+            builder: (context) => index(1),
           ));
     } else {}
   }
@@ -229,15 +230,6 @@ class _PagesNouveauArticleState extends State<ModifNouveauArticle> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ListesNouveauArticle(),
-                  ));
-            },
-            icon: Icon(Icons.arrow_back)),
         title: Text("Modifier Article"),
       ),
       body: Container(
@@ -451,7 +443,7 @@ class _PagesNouveauArticleState extends State<ModifNouveauArticle> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ListesNouveauArticle(),
+                                  builder: (context) => index(1),
                                 ));
                             //recuperer();
                           },
