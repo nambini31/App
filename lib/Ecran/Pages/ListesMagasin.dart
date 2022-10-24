@@ -1,27 +1,29 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names
 
 import 'dart:io';
-import 'package:app/Ecran/AucuneDonnes.dart';
-import 'package:app/Ecran/PagesNouveauArticle.dart';
-import 'package:app/Ecran/modele/databaseClient.dart';
+import 'package:app/Ecran/Pages/AucuneDonnes.dart';
+import 'package:app/Ecran/Pages/ListesNouveauArticle.dart';
+import 'package:app/Ecran/Ajout/AjoutNouveauArticle.dart';
+import 'package:app/Ecran/modele/dataMagasin.dart';
+import 'package:app/Ecran/modele/database_Helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:image_picker/image_picker.dart';
 import 'two_letter_icon.dart';
-import 'modele/item.dart';
+import '../modele/magasin.dart';
 
-class PagesListes extends StatefulWidget {
-  const PagesListes({super.key});
+class ListesMagasin extends StatefulWidget {
+  const ListesMagasin({super.key});
 
   @override
-  State<PagesListes> createState() => _PagesListeState();
+  State<ListesMagasin> createState() => _PagesListeState();
 }
 
 enum Actions { Update, Delete }
 
-class _PagesListeState extends State<PagesListes> {
+class _PagesListeState extends State<ListesMagasin> {
   TextEditingController nom = TextEditingController();
   TextEditingController nom1 = TextEditingController();
   List<Item> listes = [];
@@ -30,7 +32,7 @@ class _PagesListeState extends State<PagesListes> {
   String news1 = "";
 
   void recuperer() async {
-    await DatabaseClient().SelectAll().then((value) {
+    await dataItem().SelectAll().then((value) {
       listes = value;
       setState(() => listes);
     });
@@ -49,80 +51,70 @@ class _PagesListeState extends State<PagesListes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Listes des items"),
+        title: Text("Listes des Magasins"),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PagesNouveauArticle(),
+                    builder: (context) => ListesNouveauArticle(),
                   ));
             },
             icon: Icon(Icons.add),
           ),
-          IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PagesNouveauArticle(),
-                    ));
-              },
-              icon: Icon(Icons.more_vert))
         ],
       ),
       body: GestureDetector(
-        onTap: () {
-          print("clicked");
-          //Slidable.of(context)!.close(duration: Duration(seconds: 0));
-        },
-        child: SlidableAutoCloseBehavior(
-          closeWhenOpened: true,
-          closeWhenTapped: true,
-          child: Center(
-            child: (listes.isEmpty)
-                ? AucuneDonnes()
-                : ListView.builder(
-                    itemCount: listes.length,
-                    itemBuilder: (context, index) {
-                      Item item = listes[index];
-                      return SingleChildScrollView(
-                        child: Slidable(
-                          endActionPane: ActionPane(motion: ScrollMotion(), extentRatio: 0.5, children: [
-                            SlidableAction(
-                              onPressed: (context) {
-                                alerte1(item);
-                              },
-                              label: "Delete",
-                              backgroundColor: Colors.red,
-                              icon: Icons.delete,
-                            ),
-                            Padding(padding: EdgeInsets.all(2)),
-                            SlidableAction(
-                              onPressed: (context) {
-                                nom1.text = item.nom;
-                                alertmodif(item);
-                              },
-                              label: "Update",
-                              backgroundColor: Colors.blue,
-                              icon: Icons.update,
-                            )
-                          ]),
-                          child: ListTile(
-                              onTap: () {},
-                              title: Text(item.nom),
-                              subtitle: Text(item.id.toString()),
-                              leading: TwoLetterIcon(
-                                item.nom,
+          onTap: () {
+            print("clicked");
+            //Slidable.of(context)!.close(duration: Duration(seconds: 0));
+          },
+          child: SlidableAutoCloseBehavior(
+            closeWhenOpened: true,
+            closeWhenTapped: true,
+            child: Center(
+              child: (listes.isEmpty)
+                  ? AucuneDonnes()
+                  : ListView.builder(
+                      itemCount: listes.length,
+                      itemBuilder: (context, index) {
+                        Item item = listes[index];
+                        return SingleChildScrollView(
+                          child: Slidable(
+                            endActionPane: ActionPane(motion: ScrollMotion(), extentRatio: 0.5, children: [
+                              SlidableAction(
+                                onPressed: (context) {
+                                  alerte1(item);
+                                },
+                                label: "Delete",
+                                backgroundColor: Colors.red,
+                                icon: Icons.delete,
                               ),
-                              trailing: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))),
-                        ),
-                      );
-                    }),
-          ),
-        ),
-      ),
+                              Padding(padding: EdgeInsets.all(2)),
+                              SlidableAction(
+                                onPressed: (context) {
+                                  nom1.text = item.nom;
+                                  alertmodif(item);
+                                },
+                                label: "Update",
+                                backgroundColor: Colors.blue,
+                                icon: Icons.update,
+                              )
+                            ]),
+                            child: ListTile(
+                                onTap: () {},
+                                title: Text(item.nom),
+                                subtitle: Text(item.id.toString()),
+                                leading: TwoLetterIcon(
+                                  item.nom,
+                                ),
+                                trailing: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))),
+                          ),
+                        );
+                      }),
+            ),
+          )),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: alert,
@@ -138,8 +130,9 @@ class _PagesListeState extends State<PagesListes> {
       builder: (context) => AlertDialog(
         content: Container(
           //width: 100,
-          height: 140,
-          padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+          height: 120,
+          padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -156,27 +149,46 @@ class _PagesListeState extends State<PagesListes> {
                   decoration: InputDecoration(
                       contentPadding: EdgeInsets.all(2),
                       filled: true,
-                      prefixIcon: Icon(Icons.person),
+                      prefixIcon: Icon(Icons.article),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Item item = Item();
-                    item.nom = news;
-                    DatabaseClient().AjoutItem(item);
-                    print("ajout");
-                    recuperer();
-                    Navigator.pop(context);
-                  },
-                  child: Text("Ajouter"),
-                ),
-              )
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton.icon(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(Colors.blue), foregroundColor: MaterialStatePropertyAll(Colors.white)),
+                      onPressed: () {
+                        Item item = Item();
+                        item.nom = news;
+                        dataItem().AjoutItem(item);
+
+                        recuperer();
+                        Navigator.pop(context);
+                        setState(() {
+                          nom.text = "";
+                        });
+                      },
+                      icon: Icon(Icons.add_outlined),
+                      label: Text("Ajouter")),
+                  Padding(padding: EdgeInsets.all(5)),
+                  TextButton.icon(
+                      style:
+                          ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red), foregroundColor: MaterialStatePropertyAll(Colors.white)),
+                      onPressed: () {
+                        setState(() {
+                          nom.text = "";
+                        });
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.cancel),
+                      label: Text("Annuler")),
+                ],
+              ),
             ],
           ),
         ),
@@ -224,7 +236,7 @@ class _PagesListeState extends State<PagesListes> {
                             onPressed: () {
                               Navigator.pop(context);
                               item.nom = news1;
-                              DatabaseClient().UpdateItem(item);
+                              dataItem().UpdateItem(item);
                               print("Modif");
                               print(news1);
                               recuperer();
@@ -273,7 +285,7 @@ class _PagesListeState extends State<PagesListes> {
                   ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        DatabaseClient().DeleteItem(item.id);
+                        dataItem().DeleteItem(item.id);
                         recuperer();
                       },
                       child: Text("OUI")),

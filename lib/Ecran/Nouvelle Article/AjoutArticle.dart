@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class Article extends StatefulWidget {
-  const Article({super.key});
+class Article_Concurent extends StatefulWidget {
+  const Article_Concurent({super.key});
 
   @override
-  State<Article> createState() => _ArticleState();
+  State<Article_Concurent> createState() => _Article_ConcurentState();
 }
 
-class _ArticleState extends State<Article> {
+class _Article_ConcurentState extends State<Article_Concurent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +41,7 @@ class _ArticleState extends State<Article> {
                           fit: BoxFit.fill,
                         ),
                       ),
+                      // ignore: prefer_const_constructors
                       Text(
                         "Utilisateur",
                         textAlign: TextAlign.center,
