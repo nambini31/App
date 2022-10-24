@@ -53,16 +53,7 @@ class _PagesListeState extends State<ListesMagasin> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Listes des Magasins"),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => index(1),
-                ));
-          },
-          icon: Icon(Icons.arrow_back),
-        ),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
               onPressed: () {

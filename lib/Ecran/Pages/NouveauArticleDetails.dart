@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:app/Ecran/Pages/ListesNouveauArticle.dart';
+import 'package:app/Ecran/Pages/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -36,7 +37,7 @@ class _NouveauArticleDetailsState extends State<NouveauArticleDetails> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ListesNouveauArticle(),
+                    builder: (context) => index(1),
                   ));
             },
             icon: Icon(Icons.arrow_back)),

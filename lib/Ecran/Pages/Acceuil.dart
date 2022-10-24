@@ -16,7 +16,7 @@ class _AcceuilState extends State<Acceuil> {
       appBar: AppBar(
         centerTitle: true,
         title: Text("ACCEUIL"),
-        leading: Icon(Icons.person),
+        automaticallyImplyLeading: false,
       ),
       body: Center(
         child: Text("ACCEUIL"),

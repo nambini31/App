@@ -55,16 +55,7 @@ class _PagesListeState extends State<ListesNouveauArticle> {
       appBar: AppBar(
         centerTitle: true,
         title: Text("Listes des Articles"),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => index(0),
-                ));
-          },
-          icon: Icon(Icons.arrow_back),
-        ),
+        automaticallyImplyLeading: false,
         // ignore: prefer_const_literals_to_create_immutables
         actions: [
           IconButton(
