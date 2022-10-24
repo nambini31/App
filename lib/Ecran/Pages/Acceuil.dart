@@ -14,7 +14,9 @@ class _AcceuilState extends State<Acceuil> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("ACCEUIL"),
+        leading: Icon(Icons.person),
       ),
       body: Center(
         child: Text("ACCEUIL"),

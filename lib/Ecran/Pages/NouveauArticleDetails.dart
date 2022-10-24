@@ -29,6 +29,7 @@ class _NouveauArticleDetailsState extends State<NouveauArticleDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Details Article"),
         leading: IconButton(
             onPressed: () {

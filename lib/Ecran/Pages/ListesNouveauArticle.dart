@@ -53,6 +53,7 @@ class _PagesListeState extends State<ListesNouveauArticle> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text("Listes des Articles"),
         leading: IconButton(
           onPressed: () {
