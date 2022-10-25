@@ -3,6 +3,7 @@
 import 'package:app/Ecran/Pages/Acceuil.dart';
 import 'package:app/Ecran/Pages/ListesMagasin.dart';
 import 'package:app/Ecran/Pages/ListesNouveauArticle.dart';
+import 'package:app/Ecran/Pages/ListesPreparation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -24,7 +25,7 @@ class _indexState extends State<index> {
     i = widget.i;
   }
 
-  List<Widget> pages = [Acceuil(), ListesNouveauArticle(), ListesMagasin()];
+  List<Widget> pages = [Acceuil(), ListesPreparation(), ListesNouveauArticle(), ListesMagasin()];
 
   void onItemTap(int index) {
     setState(() {
@@ -39,8 +40,10 @@ class _indexState extends State<index> {
         child: pages[i],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Acceuil"),
+          BottomNavigationBarItem(icon: Icon(Icons.compare), label: "Relever"),
           BottomNavigationBarItem(icon: Icon(Icons.article), label: "Article"),
           BottomNavigationBarItem(icon: Icon(Icons.shop_rounded), label: "Magasin"),
         ],

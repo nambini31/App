@@ -37,7 +37,7 @@ class _NouveauArticleDetailsState extends State<NouveauArticleDetails> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => index(1),
+                    builder: (context) => index(2),
                   ));
             },
             icon: Icon(Icons.arrow_back)),

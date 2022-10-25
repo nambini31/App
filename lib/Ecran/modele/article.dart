@@ -9,14 +9,18 @@ class Article {
 
   int _gencode = 0;
 
-  String _magasin = "";
+  int _id_enseigne = 0;
+
+  get id_enseigne => this._id_enseigne;
+
+  set id_enseigne(value) => this._id_enseigne = value;
 
   Article();
 
-  Article.id(this._id, this._libele, this._prix, this._gencode, this._image, this._magasin);
+  Article.id(this._id, this._libele, this._prix, this._gencode, this._image, this._id_enseigne);
 
-  Article.ajt(this._libele, this._prix, this._gencode, this._image, this._magasin);
-  Article.modif(this._id, this._libele, this._prix, this._gencode, this._image, this._magasin);
+  Article.ajt(this._libele, this._prix, this._gencode, this._image, this._id_enseigne);
+  Article.modif(this._id, this._libele, this._prix, this._gencode, this._image, this._id_enseigne);
 
   int get id => this._id;
 
@@ -38,15 +42,11 @@ class Article {
 
   set gencode(value) => this._gencode = value;
 
-  get magasin => this._magasin;
-
-  set magasin(value) => this._magasin = value;
-
   void fromMap(Map<String, dynamic> map) {
     id = map["id"];
     libele = map["libele"];
     prix = map["prix"];
-    magasin = map["magasin"];
+    id_enseigne = map["id_enseigne"];
     image = map["image"];
     gencode = map["gencode"];
   }
@@ -56,7 +56,7 @@ class Article {
     map["libele"] = libele;
     map["prix"] = prix;
     map["gencode"] = gencode;
-    map["magasin"] = magasin;
+    map["id_enseigne"] = _id_enseigne;
     map["image"] = image;
     return map;
   }

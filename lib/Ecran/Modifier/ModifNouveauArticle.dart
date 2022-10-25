@@ -29,7 +29,7 @@ class ModifNouveauArticle extends StatefulWidget {
 
 class _PagesNouveauArticleState extends State<ModifNouveauArticle> {
   int gencode = 0;
-  String magasin = "";
+  int id_enseigne = 0;
   int id = 0;
   int prix = 0;
   String libele = "";
@@ -50,10 +50,10 @@ class _PagesNouveauArticleState extends State<ModifNouveauArticle> {
       listeItem = value;
       //setState(() => listeItem);
       listeItem.forEach((element) {
-        print(element.nom);
+        print(element.design_enseigne);
         listesvrai.add(DropdownMenuItem(
-          value: element.id.toString(),
-          child: Text(element.nom),
+          value: element.id_enseigne.toString(),
+          child: Text(element.design_enseigne),
         ));
       });
       setState(() => listesvrai);
@@ -64,12 +64,12 @@ class _PagesNouveauArticleState extends State<ModifNouveauArticle> {
 
   void Modifier() {
     if (formValide.currentState!.validate()) {
-      Article article = Article.modif(this.id, this.libele, this.prix, this.gencode, this.imageString, this.magasin);
+      Article article = Article.modif(this.id, this.libele, this.prix, this.gencode, this.imageString, this.id_enseigne);
       DataArticle().UpdateArticle(article);
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => index(1),
+            builder: (context) => index(2),
           ));
     } else {}
   }
@@ -213,13 +213,13 @@ class _PagesNouveauArticleState extends State<ModifNouveauArticle> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    magasin = widget.article.magasin;
+    recuperer();
+    id_enseigne = widget.article.id_enseigne;
     prix = widget.article.prix;
     gencode = widget.article.gencode;
     libele = widget.article.libele;
-    print("magasin : $magasin");
+
     imageString = widget.article.image;
-    recuperer();
     id = widget.article.id;
     libeleController.text = widget.article.libele;
     prixController.text = widget.article.prix.toString();
@@ -348,7 +348,7 @@ class _PagesNouveauArticleState extends State<ModifNouveauArticle> {
                 Container(
                   margin: EdgeInsets.only(top: 20),
                   child: DropdownButtonFormField(
-                    value: magasin,
+                    value: id_enseigne.toString(),
                     //itemHeight:  <String>['Chien', 'Chat', 'Tigre', 'Lion'].map((e) => ),
 
                     alignment: Alignment.center,
@@ -356,7 +356,8 @@ class _PagesNouveauArticleState extends State<ModifNouveauArticle> {
                     items: listesvrai,
                     hint: Text("Choix Magasin"),
                     onChanged: (value) {
-                      magasin = value!;
+                      id_enseigne = int.parse(value.toString());
+                      setState(() => id_enseigne);
                     },
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(top: 3),
@@ -443,7 +444,7 @@ class _PagesNouveauArticleState extends State<ModifNouveauArticle> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => index(1),
+                                  builder: (context) => index(2),
                                 ));
                             //recuperer();
                           },

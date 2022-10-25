@@ -30,7 +30,7 @@ class AjoutNouveauArticle extends StatefulWidget {
 
 class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
   int gencode = 0;
-  String magasin = "";
+  int id_enseigne = 0;
   int prix = 0;
   String libele = "";
   String imageString = "";
@@ -45,32 +45,17 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
 
   List<Item> listeItem = [];
 
-  void recuperer() async {
-    await dataItem().SelectAll().then((value) {
-      listeItem = value;
-      //setState(() => listeItem);
-      listeItem.forEach((element) {
-        print(element.nom);
-        listesvrai.add(DropdownMenuItem(
-          value: element.id.toString(),
-          child: Text(element.nom),
-        ));
-      });
-      setState(() => listesvrai);
-    });
-  }
-
   var formValide = GlobalKey<FormState>();
 
   void ajouter() {
     if (formValide.currentState!.validate()) {
       //ss
-      Article article = Article.ajt(this.libele, this.prix, this.gencode, imageString, this.magasin);
+      Article article = Article.ajt(this.libele, this.prix, this.gencode, imageString, this.id_enseigne);
       DataArticle().AjoutArticle(article);
       Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => index(1),
+            builder: (context) => index(2),
           ));
     } else {}
   }
@@ -87,10 +72,10 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
         // final imgString = imgbytes.base
         imageString = base64Encode(fichierImage!.readAsBytesSync());
       });
-      // print("lien :$pathImage");
+      // //print("lien :$pathImage");
 
     } else {
-      print("image null");
+      //print("image null");
     }
   }
 
@@ -201,6 +186,21 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
     );
   }
 
+  void recuperer() async {
+    await dataItem().SelectAll().then((value) {
+      listeItem = value;
+      //setState(() => listeItem);
+      listeItem.forEach((element) {
+        //print(element.design_enseigne);
+        listesvrai.add(DropdownMenuItem(
+          value: element.id_enseigne.toString(),
+          child: Text(element.design_enseigne),
+        ));
+      });
+      setState(() => listesvrai);
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -285,7 +285,7 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
                       });
                     },
                     onTap: () {
-                      //print(valeur);
+                      ////print(valeur);
                     },
                     validator: (value) => value!.isEmpty ? "Veuillez entrer la designation" : null,
                     onSaved: (newValue) {
@@ -320,7 +320,7 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
                         try {
                           prix = int.parse(value);
                         } catch (e) {
-                          print("null prix");
+                          //print("null prix");
                         }
                       });
                     },
@@ -334,7 +334,7 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
                 Container(
                   margin: EdgeInsets.only(top: 20),
                   child: DropdownButtonFormField(
-                    //value: magasin,
+                    //value: id_enseigne,
                     //itemHeight:  <String>['Chien', 'Chat', 'Tigre', 'Lion'].map((e) => ),
 
                     alignment: Alignment.center,
@@ -342,9 +342,9 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
                     items: listesvrai,
                     hint: Text("Choix Magasin"),
                     onChanged: (value) {
-                      magasin = value!;
+                      id_enseigne = int.parse(value.toString());
                       setState(
-                        () => magasin,
+                        () => id_enseigne,
                       );
                     },
                     validator: (value) => value == null ? "Veuillez choisir un Magasin" : null,
@@ -400,7 +400,7 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
                             try {
                               gencode = int.parse(value);
                             } catch (e) {
-                              print("null gencode");
+                              //print("null gencode");
                             }
                           });
                         },
@@ -433,7 +433,7 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => index(1),
+                                      builder: (context) => index(2),
                                     ));
                                 //recuperer();
                               },

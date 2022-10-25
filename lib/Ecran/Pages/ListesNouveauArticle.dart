@@ -32,11 +32,12 @@ class _PagesListeState extends State<ListesNouveauArticle> {
   void recuperer() async {
     try {
       await DataArticle().SelectAll().then((value) {
+        //print(object)
         listes = value;
         setState(() => listes);
       });
     } catch (e) {
-      print("tsys data");
+      //print("tsys data");
     }
   }
 
@@ -81,7 +82,7 @@ class _PagesListeState extends State<ListesNouveauArticle> {
       ),
       body: GestureDetector(
         onTap: () {
-          print("clicked");
+          //print("clicked");
           //Slidable.of(context)!.close(duration: Duration(seconds: 0));
         },
         child: SlidableAutoCloseBehavior(
@@ -182,7 +183,7 @@ class _PagesListeState extends State<ListesNouveauArticle> {
                     // Article Article = Article();
                     // Article.nom = news;
                     // dataArticle().AjoutArticle(Article);
-                    // print("ajout");
+                    // //print("ajout");
                     // recuperer();
                     // Navigator.pop(context);
                   },

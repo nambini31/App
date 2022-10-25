@@ -68,7 +68,7 @@ class _PagesListeState extends State<ListesMagasin> {
       ),
       body: GestureDetector(
           onTap: () {
-            print("clicked");
+            //print("clicked");
             //Slidable.of(context)!.close(duration: Duration(seconds: 0));
           },
           child: SlidableAutoCloseBehavior(
@@ -95,7 +95,7 @@ class _PagesListeState extends State<ListesMagasin> {
                               Padding(padding: EdgeInsets.all(2)),
                               SlidableAction(
                                 onPressed: (context) {
-                                  nom1.text = item.nom;
+                                  nom1.text = item.design_enseigne;
                                   alertmodif(item);
                                 },
                                 label: "Update",
@@ -105,10 +105,10 @@ class _PagesListeState extends State<ListesMagasin> {
                             ]),
                             child: ListTile(
                                 onTap: () {},
-                                title: Text(item.nom),
-                                subtitle: Text(item.id.toString()),
+                                title: Text(item.design_enseigne),
+                                subtitle: Text(item.id_enseigne.toString()),
                                 leading: TwoLetterIcon(
-                                  item.nom,
+                                  item.design_enseigne,
                                 ),
                                 trailing: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))),
                           ),
@@ -160,7 +160,7 @@ class _PagesListeState extends State<ListesMagasin> {
                           backgroundColor: MaterialStatePropertyAll(Colors.blue), foregroundColor: MaterialStatePropertyAll(Colors.white)),
                       onPressed: () {
                         Item item = Item();
-                        item.nom = news;
+                        item.design_enseigne = news;
                         dataItem().AjoutItem(item);
 
                         recuperer();
@@ -231,10 +231,10 @@ class _PagesListeState extends State<ListesMagasin> {
                         ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
-                              item.nom = news1;
+                              item.design_enseigne = news1;
                               dataItem().UpdateItem(item);
-                              print("Modif");
-                              print(news1);
+                              //print("Modif");
+                              //print(news1);
                               recuperer();
                             },
                             child: Text("Update")),
@@ -281,7 +281,7 @@ class _PagesListeState extends State<ListesMagasin> {
                   ElevatedButton(
                       onPressed: () {
                         Navigator.pop(context);
-                        dataItem().DeleteItem(item.id);
+                        dataItem().DeleteItem(item.id_enseigne);
                         recuperer();
                       },
                       child: Text("OUI")),
