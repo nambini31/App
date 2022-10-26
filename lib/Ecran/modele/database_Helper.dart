@@ -61,20 +61,21 @@ class DatabaseHelper {
     await db.execute("""
 
          CREATE TABLE  releve (
-         id_releve INTEGER NOT NULL,
-         ref_art id NULL,
+         id_releve INTEGER PRIMARY KEY,
+         ref_art TEXT NULL,
          libelle_art TEXT NULL,
          gencode_art TEXT NULL,
-         prix_art  NULL,
+         prix_art INTEGER NULL,
         
-         ref_art_conc INTEGER NULL,
-         libele_art_conc TEXT NULL,
+         ref_art_conc TEXT NULL,
+         libelle_art_conc TEXT NULL,
          gencode_art_conc TEXT NULL,
          prix_art_conc INTEGER NULL,
 
          etat_art INTEGER  NULL,
-         date_prise_releve TEXT  NULL,
-         date_val_releve TEXT NULL
+         date_val_releve TEXT NULL,
+         id_prep INTEGER NULL
+         
       )
     
     """);

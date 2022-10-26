@@ -24,7 +24,7 @@ class _ListesPreparationState extends State<ListesPreparation> {
   Preparation prepTop = Preparation();
   String news = "";
   String news1 = "";
-
+  int id = 0;
   bool top = false;
 
   Future recuperer() async {
@@ -49,7 +49,7 @@ class _ListesPreparationState extends State<ListesPreparation> {
     return Center(
       child: top
           ? ListesTop1000(
-              prep: prepTop,
+              id: id,
             )
           : Scaffold(
               appBar: AppBar(
@@ -106,6 +106,7 @@ class _ListesPreparationState extends State<ListesPreparation> {
                                         onTap: () {
                                           setState(() {
                                             top = true;
+                                            id = prep.id_prep;
                                           });
                                         },
                                         title: Center(child: Text(prep.libelle_prep)),
