@@ -9,6 +9,7 @@ import 'package:app/Ecran/Pages/index.dart';
 import 'package:app/Ecran/modele/article.dart';
 import 'package:app/Ecran/modele/dataArticle.dart';
 import 'package:app/Ecran/modele/dataMagasin.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -333,11 +334,9 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 20),
-                  child: DropdownButtonFormField(
+                  child: DropdownButtonFormField2(
                     //value: id_enseigne,
                     //itemHeight:  <String>['Chien', 'Chat', 'Tigre', 'Lion'].map((e) => ),
-
-                    alignment: Alignment.center,
 
                     items: listesvrai,
                     hint: Text("Choix Magasin"),
@@ -347,9 +346,10 @@ class _PagesNouveauArticleState extends State<AjoutNouveauArticle> {
                         () => id_enseigne,
                       );
                     },
+                    itemPadding: EdgeInsets.only(right: 20, left: 30),
                     validator: (value) => value == null ? "Veuillez choisir un Magasin" : null,
                     decoration: InputDecoration(
-                      contentPadding: EdgeInsets.only(top: 3),
+                      contentPadding: EdgeInsets.all(12),
                       filled: true,
 
                       fillColor: Colors.white,

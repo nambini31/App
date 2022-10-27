@@ -13,8 +13,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ListesPreparation extends StatefulWidget {
-  const ListesPreparation({super.key});
-
   @override
   State<ListesPreparation> createState() => _ListesPreparationState();
 }

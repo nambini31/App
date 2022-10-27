@@ -21,6 +21,9 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   provider: ^4.0.4
   intl: ^0.17.0
+  dropdown_button2: ^1.8.9
+  autocomplete_textfield: ^2.0.1
+  flutter_typeahead: ^4.1.1
 
 dev_dependencies:
   flutter_test:

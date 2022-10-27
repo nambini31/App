@@ -26,6 +26,8 @@ class _ListesTop1000State extends State<ListesTop1000> {
 
   int i = 0;
 
+  bool rel = false;
+
   Future recuperer() async {
     await DataTop1000().SelectAll(widget.id).then((value) {
       //print()
@@ -89,27 +91,45 @@ class _ListesTop1000State extends State<ListesTop1000> {
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            actions: [IconButton(onPressed: () {}, icon: Icon(Icons.takeout_dining))],
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => index.rel(widget.id),
+                        ));
+                  },
+                  icon: Icon(Icons.takeout_dining))
+            ],
             title: Text("TOP 1000"),
-            leading: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => index(1),
-                      ));
-                },
-                icon: Icon(Icons.arrow_back)),
+            leading: rel
+                ? Icon(
+                    Icons.arrow_back,
+                    color: Colors.transparent,
+                  )
+                : IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => index(1),
+                          ));
+                    },
+                    icon: Icon(Icons.arrow_back)),
           ),
           body: DefaultTabController(
             length: 3,
             initialIndex: 0,
-            child: Container(
-              child: Scaffold(
-                appBar: AppBar(
+            child: Scaffold(
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(110),
+                child: AppBar(
+                  automaticallyImplyLeading: false,
                   titleSpacing: 15,
                   title: Container(
                     height: 40,
+                    margin: EdgeInsets.only(top: 10),
                     child: TextFormField(
                       onChanged: (value) {
                         setState(() {
@@ -146,12 +166,12 @@ class _ListesTop1000State extends State<ListesTop1000> {
                         )
                       ]),
                 ),
-                body: TabBarView(children: [
-                  Toutes(),
-                  Attente(),
-                  Valide(),
-                ]),
               ),
+              body: TabBarView(children: [
+                Toutes(),
+                Attente(),
+                Valide(),
+              ]),
             ),
           ),
         ));
